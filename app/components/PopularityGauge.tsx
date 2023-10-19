@@ -3,6 +3,7 @@ import { AiOutlineDislike } from "react-icons/ai";
 import { AiFillLike } from "react-icons/ai";
 import { AiOutlineLike } from "react-icons/ai";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 interface PopularityGaugeProps {
 	likes: number;
@@ -22,7 +23,17 @@ const PopularityGauge: React.FC<PopularityGaugeProps> = ({
 		if (liked) {
 			setLikes(Likes - 1);
 			setLiked(false);
+			toast.success("Like Removed ", {
+				duration: 2000,
+				position: "top-right",
+				icon: "👎",
+			});
 		} else {
+			toast.success("Product Liked", {
+				duration: 2000,
+				position: "top-right",
+				icon: "👎",
+			});
 			setLikes(Likes + 1);
 			setLiked(true);
 
@@ -37,10 +48,19 @@ const PopularityGauge: React.FC<PopularityGaugeProps> = ({
 		if (disliked) {
 			setDislikes(Dislikes - 1);
 			setDisliked(false);
+			toast.success("Dislike Removed ", {
+				duration: 2000,
+				position: "top-right",
+				icon: "👍",
+			});
 		} else {
 			setDislikes(Dislikes + 1);
 			setDisliked(true);
-
+			toast.success("Product Disliked", {
+				duration: 2000,
+				position: "top-right",
+				icon: "👍",
+			});
 			if (liked) {
 				setLikes(Likes - 1);
 				setLiked(false);

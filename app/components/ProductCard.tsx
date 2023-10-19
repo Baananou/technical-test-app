@@ -3,6 +3,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import React, { useState, useEffect } from "react";
 import { Product } from "../Types";
 import PopularityGauge from "./PopularityGauge";
+import toast from "react-hot-toast";
 
 interface ProductCardProps {
 	product: Product;
@@ -53,7 +54,16 @@ const ProductCard: React.FC<ProductCardProps> = ({
 				<h2 className="text-lg font-bold">{product.title}</h2>
 				<div className="flex gap-2">
 					<MdDeleteOutline
-						onClick={onRemove}
+						onClick={() => {
+							onRemove();
+							toast.success("Product Removed Successfully", {
+								duration: 2000,
+								position: "top-right",
+								
+								// Custom Icon
+								icon: "👏",
+							});
+						}}
 						size={24}
 						color="red"
 						className="cursor-pointer"
