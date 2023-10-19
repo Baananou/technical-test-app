@@ -77,7 +77,7 @@ const PopularityGauge: React.FC<PopularityGaugeProps> = ({
 						<AiFillDislike size={24} />
 					) : (
 						<AiOutlineDislike size={24} />
-					)}{" "}
+					)}
 					({Dislikes})
 				</button>
 			</div>
