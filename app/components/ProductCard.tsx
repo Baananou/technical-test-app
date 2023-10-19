@@ -1,4 +1,5 @@
-import { MdDeleteForever } from "react-icons/md";
+import { MdDeleteOutline } from "react-icons/md";
+
 import React, { useState, useEffect } from "react";
 import { Product } from "../Types";
 import PopularityGauge from "./PopularityGauge";
@@ -51,7 +52,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
 			<div className="flex justify-between pb-4">
 				<h2 className="text-lg font-bold">{product.title}</h2>
 				<div className="flex gap-2">
-					<MdDeleteForever onClick={onRemove} size={24} color="red" />
+					<MdDeleteOutline
+						onClick={onRemove}
+						size={24}
+						color="red"
+						className="cursor-pointer"
+					/>
 				</div>
 			</div>
 			<PopularityGauge likes={product.likes} dislikes={product.dislikes} />
