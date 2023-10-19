@@ -30,7 +30,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
 	if (showLoading) {
 		return (
-			<div className="p-4">
+			<div>
 				<div className="bg-white rounded-lg shadow-md p-4">
 					<div className="flex justify-between pb-4">
 						<div className="animate-pulse bg-gray-200 w-1/3 h-6 rounded"></div>
@@ -47,19 +47,17 @@ const ProductCard: React.FC<ProductCardProps> = ({
 	}
 
 	return (
-		<div className="p-4">
-			<div className="bg-white rounded-lg shadow-md p-4">
-				<div className="flex justify-between pb-4">
-					<h2 className="text-lg font-bold">{product.title}</h2>
-					<div className="flex gap-2">
-						<MdDeleteForever onClick={onRemove} size={24} color="red" />
-					</div>
+		<div className="bg-white rounded-lg shadow-md p-4">
+			<div className="flex justify-between pb-4">
+				<h2 className="text-lg font-bold">{product.title}</h2>
+				<div className="flex gap-2">
+					<MdDeleteForever onClick={onRemove} size={24} color="red" />
 				</div>
-				<PopularityGauge likes={product.likes} dislikes={product.dislikes} />
-				<p className="bg-gray-300 p-1 px-2 rounded-lg w-fit mt-4">
-					{product.category}
-				</p>
 			</div>
+			<PopularityGauge likes={product.likes} dislikes={product.dislikes} />
+			<p className="bg-gray-300 p-1 px-2 rounded-lg w-fit mt-4">
+				{product.category}
+			</p>
 		</div>
 	);
 };

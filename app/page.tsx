@@ -5,6 +5,7 @@ import ProductCard from "./components/ProductCard";
 import { products } from "./lib/products";
 import CategoryFilter from "./components/CategoryFilter";
 import Pagination from "./components/Pagination";
+import PerPageSelector from "./components/PerPageSelector";
 
 export default function Home() {
 	const [productData, setProductData] = useState<Product[] | null>(null);
@@ -76,14 +77,19 @@ export default function Home() {
 			<h1 className="text-2xl my-4">Products</h1>
 
 			<div className="container p-6">
-				<div className="flex justify-center my-4">
+				<div className="flex justify-between items-center my-4 gap-4">
 					<CategoryFilter
 						products={productData || []}
 						selectedCategories={selectedCategories}
 						onCategoryChange={filterProductsByCategory}
 					/>
+					<PerPageSelector
+						itemsPerPage={itemsPerPage}
+						setItemsPerPage={setItemsPerPage}
+						totalItems={filteredProducts?.length || 0}
+					/>
 				</div>
-				<div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2  gap-4">
+				<div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4">
 					{currentItems?.map((product) => (
 						<ProductCard
 							isLoading={false}
@@ -93,7 +99,7 @@ export default function Home() {
 						/>
 					))}
 				</div>
-				<div className="flex justify-between items-center mx-12">
+				<div className="flex justify-center items-center mx-12">
 					<Pagination
 						currentPage={currentPage}
 						totalPage={Math.ceil(
@@ -101,18 +107,6 @@ export default function Home() {
 						)}
 						onPageChange={paginate}
 					/>
-					<div className="flex flex-row xl:flex-col items-center justify-center mt-4 ">
-						<select
-							className="rounded-lg p-2 border border-gray-300"
-							title="per page"
-							value={itemsPerPage}
-							onChange={(e) => setItemsPerPage(Number(e.target.value))}>
-							<option value={filteredProducts?.length}>All</option>
-							<option value={4}>4 per page</option>
-							<option value={8}>8 per page</option>
-							<option value={12}>12 per page</option>
-						</select>
-					</div>
 				</div>
 			</div>
 		</div>
