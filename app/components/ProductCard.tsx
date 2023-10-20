@@ -33,15 +33,15 @@ const ProductCard: React.FC<ProductCardProps> = ({
 	if (showLoading) {
 		return (
 			<div>
-				<div className="bg-white rounded-lg shadow-md p-4 h-[172px]">
+				<div className="bg-white rounded-lg shadow-md p-4 h-[160px]">
 					<div className="flex justify-between pb-4">
 						<div className="animate-pulse bg-gray-200 w-1/3 h-6 rounded"></div>
 					</div>
 					<div className="animate-pulse bg-gray-200 h-6 rounded w-2/3"></div>
 					<div className="flex justify-between items-center mt-4">
 						<div className="animate-pulse bg-gray-200 w-1/5 h-6 rounded"></div>
-						<div className="animate-pulse bg-gray-200 w-1/5 h-6 rounded"></div>
-						<div className="animate-pulse bg-gray-200 w-1/5 h-6 rounded"></div>
+						{/* <div className="animate-pulse bg-gray-200 w-1/5 h-6 rounded"></div>
+						<div className="animate-pulse bg-gray-200 w-1/5 h-6 rounded"></div> */}
 					</div>
 				</div>
 			</div>
@@ -56,11 +56,19 @@ const ProductCard: React.FC<ProductCardProps> = ({
 					<MdDeleteOutline
 						onClick={() => {
 							onRemove();
-							toast.success("Product Removed Successfully", {
-								duration: 2000,
-								position: "top-right",
-								icon: "👏",
-							});
+							// toast.success("Product Removed Successfully", {
+							// 	duration: 2000,
+							// 	position: "top-right",
+							// 	icon: "🗑️",
+							// });
+
+							toast.custom(
+								<div className="flex justify-center items-center bg-white rounded-lg text-lg p-2 shadow-lg">
+									<MdDeleteOutline size={24} color="red" />
+									Product Removed Successfully
+								</div>,
+								{ duration: 1000, position: "top-right" }
+							);
 						}}
 						size={24}
 						color="red"

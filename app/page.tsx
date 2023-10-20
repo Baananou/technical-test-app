@@ -66,7 +66,6 @@ export default function Home() {
 		}
 	};
 
-	console.log(selectedCategories);
 
 	const filterProductsByCategory = (category: string) => {
 		setSelectedCategories((prevSelectedCategories) => {
@@ -102,7 +101,12 @@ export default function Home() {
 
 	// Handle page change
 	const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+	console.log(currentPage);
 
+	useEffect(() => {
+		setCurrentPage(1);
+	}, [itemsPerPage]);
+	
 	return (
 		<div className=" justify-center flex items-center flex-col">
 			<h1 className="text-2xl my-4 font-bold text-primary-dark">Products</h1>
@@ -136,7 +140,9 @@ export default function Home() {
 								No products for the moment
 							</h1>
 							<button
-								className="flex gap-2 items-center"
+								className="flex gap-2 items-center bg-white shadow-lg p-2
+								rounded-lg
+						"
 								onClick={() => window.location.reload()}>
 								Please Reload the Page
 								<AiOutlineReload className="hover:animate-spin" size={24} />
