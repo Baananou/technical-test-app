@@ -9,11 +9,18 @@ import Pagination from "./components/Pagination";
 import PerPageSelector from "./components/PerPageSelector";
 
 export default function Home() {
+	// State for product data
 	const [productData, setProductData] = useState<Product[] | null>(null);
+
+	// State for selected categories
 	const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+
+	// State for filtered products
 	const [filteredProducts, setFilteredProducts] = useState<Product[] | null>(
 		null
 	);
+
+	// State for category-product mapping
 	const [categoryProductsMap, setCategoryProductsMap] = useState<{
 		[category: string]: Product[];
 	}>({});
@@ -24,6 +31,7 @@ export default function Home() {
 		filteredProducts?.length || 100
 	);
 
+	// Fetch product data and initialize category-product mapping
 	useEffect(() => {
 		products.then((data) => {
 			setProductData(data);
@@ -39,6 +47,7 @@ export default function Home() {
 		});
 	}, []);
 
+	// Remove a product from the list and update category mapping
 	const removeProduct = (productId: string, category: string) => {
 		if (productData) {
 			const updatedProducts = productData.filter(
@@ -66,7 +75,7 @@ export default function Home() {
 		}
 	};
 
-
+	// Filter products by category
 	const filterProductsByCategory = (category: string) => {
 		setSelectedCategories((prevSelectedCategories) => {
 			if (prevSelectedCategories.includes(category)) {
@@ -77,6 +86,7 @@ export default function Home() {
 		});
 	};
 
+	// Update filtered products when selected categories change
 	useEffect(() => {
 		if (productData) {
 			const filtered =
@@ -101,31 +111,36 @@ export default function Home() {
 
 	// Handle page change
 	const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
-	console.log(currentPage);
 
+	// Reset page to 1 when itemsPerPage changes
 	useEffect(() => {
 		setCurrentPage(1);
 	}, [itemsPerPage]);
-	
+
 	return (
-		<div className=" justify-center flex items-center flex-col">
+		<div className="justify-center flex items-center flex-col">
 			<h1 className="text-2xl my-4 font-bold text-primary-dark">Products</h1>
 
 			<div className="container p-6">
 				<div className="flex justify-between items-center my-4 gap-4">
+					{/* Category filter component */}
 					<CategoryFilter
 						products={productData || []}
 						selectedCategories={selectedCategories}
 						onCategoryChange={filterProductsByCategory}
 					/>
+
+					{/* Items per page selector component */}
 					<PerPageSelector
 						itemsPerPage={itemsPerPage}
 						setItemsPerPage={setItemsPerPage}
 						totalItems={filteredProducts?.length || 0}
 					/>
 				</div>
+
 				<div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4">
 					{currentItems && currentItems.length > 0 ? (
+						// Render product cards
 						currentItems.map((product) => (
 							<ProductCard
 								isLoading={false}
@@ -135,14 +150,13 @@ export default function Home() {
 							/>
 						))
 					) : (
+						// Display message and reload button when no products
 						<div className="py-4">
 							<h1 className="text-red-600 font-bold">
 								No products for the moment
 							</h1>
 							<button
-								className="flex gap-2 items-center bg-white shadow-lg p-2
-								rounded-lg
-						"
+								className="flex gap-2 items-center bg-white shadow-lg p-2 rounded-lg"
 								onClick={() => window.location.reload()}>
 								Please Reload the Page
 								<AiOutlineReload className="hover:animate-spin" size={24} />
@@ -150,7 +164,9 @@ export default function Home() {
 						</div>
 					)}
 				</div>
+
 				<div className="flex justify-center items-center mx-12">
+					{/* Pagination component */}
 					<Pagination
 						currentPage={currentPage}
 						totalPage={Math.ceil(
