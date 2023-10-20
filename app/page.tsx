@@ -37,10 +37,8 @@ export default function Home() {
 	const filterProductsByCategory = (category: string) => {
 		setSelectedCategories((prevSelectedCategories) => {
 			if (prevSelectedCategories.includes(category)) {
-				// If the category is already selected, remove it
 				return prevSelectedCategories.filter((cat) => cat !== category);
 			} else {
-				// If the category is not selected, add it
 				return [...prevSelectedCategories, category];
 			}
 		});
@@ -74,7 +72,7 @@ export default function Home() {
 
 	return (
 		<div className=" justify-center flex items-center flex-col">
-			<h1 className="text-2xl my-4">Products</h1>
+			<h1 className="text-2xl my-4 font-bold text-primary-dark">Products</h1>
 
 			<div className="container p-6">
 				<div className="flex justify-between items-center my-4 gap-4">

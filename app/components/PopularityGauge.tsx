@@ -26,13 +26,13 @@ const PopularityGauge: React.FC<PopularityGaugeProps> = ({
 			toast.success("Like Removed ", {
 				duration: 2000,
 				position: "top-right",
-				icon: "👎",
+				icon: "👍",
 			});
 		} else {
 			toast.success("Product Liked", {
 				duration: 2000,
 				position: "top-right",
-				icon: "👎",
+				icon: "👍",
 			});
 			setLikes(Likes + 1);
 			setLiked(true);
@@ -51,7 +51,7 @@ const PopularityGauge: React.FC<PopularityGaugeProps> = ({
 			toast.success("Dislike Removed ", {
 				duration: 2000,
 				position: "top-right",
-				icon: "👍",
+				icon: "👎",
 			});
 		} else {
 			setDislikes(Dislikes + 1);
@@ -59,7 +59,7 @@ const PopularityGauge: React.FC<PopularityGaugeProps> = ({
 			toast.success("Product Disliked", {
 				duration: 2000,
 				position: "top-right",
-				icon: "👍",
+				icon: "👎",
 			});
 			if (liked) {
 				setLikes(Likes - 1);
@@ -72,26 +72,24 @@ const PopularityGauge: React.FC<PopularityGaugeProps> = ({
 		<>
 			<div className="flex items-center">
 				<div
-					className={`w-1/2 h-2 rounded-l-lg bg-green-500`}
+					className={`w-1/2 h-1 rounded-l-lg bg-like`}
 					style={{ width: `${(Likes / (Likes + Dislikes)) * 100}%` }}></div>
 				<div
-					className={`w-1/2 h-2 rounded-r-lg bg-red-500`}
+					className={`w-1/2 h-1 rounded-r-lg bg-dislike`}
 					style={{ width: `${(Dislikes / (Likes + Dislikes)) * 100}%` }}></div>
 			</div>
 
-			<div className="flex justify-between my-4">
+			<div className="flex justify-between mb-4 mt-2">
 				<button
 					onClick={handleLikeClick}
-					className={`btn ${
-						liked ? "text-green-500" : "text-gray-500"
-					} flex gap-2`}>
+					className={`btn ${liked ? "text-like" : "text-gray-500"} flex gap-2`}>
 					{liked ? <AiFillLike size={24} /> : <AiOutlineLike size={24} />} (
 					{Likes})
 				</button>
 				<button
 					onClick={handleDislikeClick}
 					className={`btn ${
-						disliked ? "text-red-500" : "text-gray-500"
+						disliked ? "text-dislike" : "text-gray-500"
 					} flex gap-2`}>
 					{disliked ? (
 						<AiFillDislike size={24} />

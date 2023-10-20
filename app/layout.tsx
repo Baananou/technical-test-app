@@ -2,8 +2,9 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Toast from "./components/Toast";
+import { Providers } from "@/redux/Providers";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
 	metadataBase: new URL("https://exemple.app"),
@@ -11,19 +12,21 @@ export const metadata: Metadata = {
 		default: "Products",
 		template: `%s | Products`,
 	},
-	description: "Products for my technical interview.",
+	description: "Products Grid for my technical interview.",
 };
 
 export default function RootLayout({
-  children,
+	children,
 }: {
-  children: React.ReactNode
+	children: React.ReactNode;
 }) {
-  return (
+	return (
 		<html lang="en">
 			<body className={inter.className}>
 				<Toast />
-				{children}
+				<Providers>
+					<main className="bg-primary-gradient min-h-screen">{children}</main>
+				</Providers>
 			</body>
 		</html>
 	);

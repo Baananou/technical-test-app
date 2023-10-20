@@ -33,7 +33,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 	if (showLoading) {
 		return (
 			<div>
-				<div className="bg-white rounded-lg shadow-md p-4">
+				<div className="bg-white rounded-lg shadow-md p-4 h-[172px]">
 					<div className="flex justify-between pb-4">
 						<div className="animate-pulse bg-gray-200 w-1/3 h-6 rounded"></div>
 					</div>
@@ -59,7 +59,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 							toast.success("Product Removed Successfully", {
 								duration: 2000,
 								position: "top-right",
-								
+
 								// Custom Icon
 								icon: "👏",
 							});
@@ -71,7 +71,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 				</div>
 			</div>
 			<PopularityGauge likes={product.likes} dislikes={product.dislikes} />
-			<p className="bg-gray-300 p-1 px-2 rounded-lg w-fit mt-4">
+			<p className="bg-primary-shade text-primary-dark p-1 px-2 rounded-lg w-fit mt-4">
 				{product.category}
 			</p>
 		</div>
