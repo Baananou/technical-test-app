@@ -24,14 +24,14 @@ module.exports = {
 
 			colors: {
 				primary: {
-					light: "#7EA0B3", // A lighter shade of blue
-					DEFAULT: "#1F2D46", // A dark blue or charcoal color
-					dark: "#112033", // An even darker shade of blue
-					shade: "#E0E0E0", // A shade of the primary color for button backgrounds
+					light: "#7EA0B3",
+					DEFAULT: "#1F2D46",
+					dark: "#112033",
+					shade: "#E0E0E0",
 				},
-				like: "#2ECC71", // A green color for the "like" button
-				dislike: "#E74C3C", // A red color for the "dislike" button
-				remove: "#F39C12", // A yellow color for the "remove" button
+				like: "#2ECC71",
+				dislike: "#E74C3C",
+				remove: "#F39C12",
 			},
 		},
 	},

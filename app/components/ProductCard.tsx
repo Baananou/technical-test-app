@@ -59,8 +59,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
 							toast.success("Product Removed Successfully", {
 								duration: 2000,
 								position: "top-right",
-
-								// Custom Icon
 								icon: "👏",
 							});
 						}}

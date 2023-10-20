@@ -1,4 +1,5 @@
 "use client";
+import { AiOutlineReload } from "react-icons/ai";
 import React, { useEffect, useState } from "react";
 import { Product } from "./Types";
 import ProductCard from "./components/ProductCard";
@@ -13,6 +14,9 @@ export default function Home() {
 	const [filteredProducts, setFilteredProducts] = useState<Product[] | null>(
 		null
 	);
+	const [categoryProductsMap, setCategoryProductsMap] = useState<{
+		[category: string]: Product[];
+	}>({});
 
 	// Pagination state
 	const [currentPage, setCurrentPage] = useState(1);
@@ -21,18 +25,48 @@ export default function Home() {
 	);
 
 	useEffect(() => {
-		products.then((data) => setProductData(data));
+		products.then((data) => {
+			setProductData(data);
+			const categoryMap: { [category: string]: Product[] } = {};
+			data.forEach((product) => {
+				if (!categoryMap[product.category]) {
+					categoryMap[product.category] = [product];
+				} else {
+					categoryMap[product.category]?.push(product);
+				}
+			});
+			setCategoryProductsMap(categoryMap);
+		});
 	}, []);
 
-	const removeProduct = (productId: string) => {
+	const removeProduct = (productId: string, category: string) => {
 		if (productData) {
 			const updatedProducts = productData.filter(
 				(product) => product.id !== productId
 			);
 			setProductData(updatedProducts);
+
+			// Check if any products with the same category exist
+			if (categoryProductsMap[category]) {
+				const updatedCategoryProducts = categoryProductsMap[category]?.filter(
+					(product) => product.id !== productId
+				);
+				if (updatedCategoryProducts?.length === 0) {
+					// Remove the category from selectedCategories
+					setSelectedCategories((prevSelectedCategories) =>
+						prevSelectedCategories.filter((cat) => cat !== category)
+					);
+				}
+				setCategoryProductsMap((prevCategoryProductsMap) => {
+					const updatedMap = { ...prevCategoryProductsMap };
+					updatedMap[category] = updatedCategoryProducts || [];
+					return updatedMap;
+				});
+			}
 		}
 	};
-	console.log(productData);
+
+	console.log(selectedCategories);
 
 	const filterProductsByCategory = (category: string) => {
 		setSelectedCategories((prevSelectedCategories) => {
@@ -65,7 +99,6 @@ export default function Home() {
 		indexOfFirstItem,
 		indexOfLastItem
 	);
-	// console.log(filteredProducts);
 
 	// Handle page change
 	const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
@@ -88,14 +121,28 @@ export default function Home() {
 					/>
 				</div>
 				<div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4">
-					{currentItems?.map((product) => (
-						<ProductCard
-							isLoading={false}
-							key={product.id}
-							product={product}
-							onRemove={() => removeProduct(product.id)}
-						/>
-					))}
+					{currentItems && currentItems.length > 0 ? (
+						currentItems.map((product) => (
+							<ProductCard
+								isLoading={false}
+								key={product.id}
+								product={product}
+								onRemove={() => removeProduct(product.id, product.category)}
+							/>
+						))
+					) : (
+						<div className="py-4">
+							<h1 className="text-red-600 font-bold">
+								No products for the moment
+							</h1>
+							<button
+								className="flex gap-2 items-center"
+								onClick={() => window.location.reload()}>
+								Please Reload the Page
+								<AiOutlineReload className="hover:animate-spin" size={24} />
+							</button>
+						</div>
+					)}
 				</div>
 				<div className="flex justify-center items-center mx-12">
 					<Pagination
