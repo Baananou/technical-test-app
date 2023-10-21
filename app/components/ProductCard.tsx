@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Product } from "../Types";
 import PopularityGauge from "./PopularityGauge";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
 // Define props interface for ProductCard
 interface ProductCardProps {
@@ -76,9 +77,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
 			</div>
 			{/* Popularity gauge component */}
 			<PopularityGauge likes={product.likes} dislikes={product.dislikes} />
-			<p className="bg-primary-shade text-primary-dark p-1 px-2 rounded-lg w-fit mt-4">
-				{product.category}
-			</p>
+
+			{/* Category Page link */}
+			<Link href={`/categories/${product.category}`}>
+				<p className="bg-primary shadow-lg text-white p-1 px-2 rounded-lg w-fit">
+					{product.category}
+				</p>
+			</Link>
 		</div>
 	);
 };
