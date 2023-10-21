@@ -4,11 +4,14 @@ import React, { useEffect, useState } from "react";
 import { Product } from "../../Types";
 import ProductCard from "../../components/ProductCard";
 import { products } from "../../lib/products";
-import { useRouter } from "next/navigation"; // Import useRouter from 'next/router'
+import { useRouter } from "next/navigation";
 
 export default function Page({ params }: { params: { category: string } }) {
-	const { category } = params;
-	const router = useRouter(); // Initialize useRouter
+	
+	// Decoded the Category so i can Receive the & character
+	const category = decodeURIComponent(params.category);
+
+	const router = useRouter();
 
 	// State for product data
 	const [productData, setProductData] = useState<Product[] | null>(null);

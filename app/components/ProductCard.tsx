@@ -79,7 +79,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
 			<PopularityGauge likes={product.likes} dislikes={product.dislikes} />
 
 			{/* Category Page link */}
-			<Link href={`/categories/${product.category}`}>
+			{/* Encoded the Category so i can pass the & character*/}
+			<Link href={`/categories/${encodeURIComponent(product.category)}`}>
 				<p className="bg-primary shadow-lg text-white p-1 px-2 rounded-lg w-fit">
 					{product.category}
 				</p>
