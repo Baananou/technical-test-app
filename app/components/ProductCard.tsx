@@ -61,13 +61,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
 					<MdDeleteOutline
 						onClick={() => {
 							onRemove();
-							toast.custom(
-								<div className="flex justify-center items-center bg-white rounded-lg text-lg p-2 shadow-lg">
-									<MdDeleteOutline size={24} color="red" />
-									Product Removed Successfully
-								</div>,
-								{ duration: 1000, position: "top-right" }
-							);
+							toast.success("Product Removed", {
+								duration: 2000,
+								position: "top-right",
+								icon: "🗑️",
+							});
 						}}
 						size={24}
 						color="red"
