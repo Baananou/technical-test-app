@@ -114,6 +114,7 @@ const _products: Product[] = [
   },
 ];
 
-export const products: Promise<Product[]> = new Promise((resolve, reject) =>
-  setTimeout(resolve, 100, _products),
+ // I had to remove reject, because when i run npm run build it returned Type error: 'reject' is declared but its value is never read.
+export const products: Promise<Product[]> = new Promise((resolve) =>
+	setTimeout(resolve, 100, _products)
 );

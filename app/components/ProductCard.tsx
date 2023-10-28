@@ -32,6 +32,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 				clearTimeout(timeout);
 			};
 		}
+		return undefined;
 	}, [isLoading]);
 
 	// Render loading animation if isLoading is true
